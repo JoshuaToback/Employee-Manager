@@ -12,5 +12,6 @@ const db = mysql2.createConnection(
     console.log(`Connected to the company_db database.`)
   );
 
+
 db.connect();
 module.exports = db;
