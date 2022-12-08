@@ -1,32 +1,18 @@
 const inquirer = require("inquirer");
 const connection = require("./db/connection");
-const people = require('./db/people')
+const peopleController = require('./db/people')
 
-require('dotenv').config()
-
-connection.connect(err => {
-  if (err) {
-  console.log('connected as id ' + connection.threadId);
-   afterConnection();
-  }
-  });
-
-const afterConnection = () => {
+function promptUser() {
   console.log("***********************************")
   console.log("*                                 *")
   console.log("*        EMPLOYEE TRACKER         *")
   console.log("*                                 *")
   console.log("***********************************")
-  promptUser();
-};
-  
-
-const promptUser = () => {
   inquirer.prompt([
     {
       type: "list",
-      name: "choice",
-      message: "Welcome to the Employee Manager! What would you like to Manage today?",
+      name: "choices",
+      message: "What would you like to Manage today?",
       choices: [
           'View all Departments', 
           'View all Roles', 
@@ -41,7 +27,7 @@ const promptUser = () => {
           'Delete a Role',
           'Delete an Employee',
           'View Department Budgets',
-          'No Action'
+          'End Program'
       ]
     }
   ])
@@ -49,12 +35,31 @@ const promptUser = () => {
     const { choices } = answers;
 
     if (choices === 'View all Departments') {
-      console.log('Showing all Departments...\n');
-      people.showDepartments();
+      peopleController.showDepartments();
     };
 
     if (choices === 'View all Roles') {
-      console.log('Showing All Roles...\n');
+      peopleController.showRoles();
+    };
+
+    if (choices === 'View all Employees') {
+      peopleController.showEmployees();
     }
+
+    if (choices === 'Add a Department') {
+      peopleController.addDepartment();
+    }
+
+
+    if (choices === 'End Program') {
+      connection.end();
+      return;
+    }
+    promptUser();
   });
+  
 };
+console.log('\n\n')
+promptUser();
+
+module.exports = promptUser;
