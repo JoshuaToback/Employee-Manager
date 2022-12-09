@@ -26,9 +26,9 @@
   ## Future Implementations
   I will be adding several features to this project:
 
-  <li>After entering information or selecting an employee, redirect to the main menu.</li>
   <li>Logo added with ASCII</li>
   <li>Edit Employee ID Numbers</li>
+  <li>Prevent Menu from Popping Up while inputting</li>
   
   ## Questions
   Have questions about this project?  
