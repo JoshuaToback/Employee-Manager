@@ -8,11 +8,12 @@ function promptUser() {
   console.log("*        EMPLOYEE TRACKER         *")
   console.log("*                                 *")
   console.log("***********************************")
+  console.log('\nWelcome to the Employee Tracker! What would you like to manage today? \n');
   inquirer.prompt([
     {
       type: "list",
+      message: 'What would you like to do?',
       name: "choices",
-      message: "What would you like to Manage today?",
       choices: [
           'View all Departments', 
           'View all Roles', 
@@ -21,17 +22,13 @@ function promptUser() {
           'Add a Role', 
           'Add an Employee', 
           'Update an Employee Role',
-          'Update an Employee Manager',
-          "View Employees by Department",
           'Delete a Department',
           'Delete a Role',
           'Delete an Employee',
-          'View Department Budgets',
           'End Program'
       ]
     }
-  ])
-  .then((answers) => {
+  ]).then((answers) => {
     const { choices } = answers;
 
     if (choices === 'View all Departments') {
@@ -50,16 +47,37 @@ function promptUser() {
       peopleController.addDepartment();
     }
 
+    if (choices === 'Add a Role') {
+      peopleController.addRole();
+    }
 
+    if (choices === 'Add an Employee') {
+      peopleController.addEmployee();
+    }
+
+    if (choices === 'Delete a Department') {
+      peopleController.deleteDepartment();
+    }
+
+    if (choices === 'Delete a Role') {
+      peopleController.deleteRole();
+    }
+
+    if (choices === 'Delete an Employee') {
+      peopleController.deleteEmployee();
+    }
+
+    if (choices === 'Update an Employee Role') {
+      peopleController.updateEmployee();
+    }
     if (choices === 'End Program') {
       connection.end();
       return;
     }
-    promptUser();
   });
   
 };
 console.log('\n\n')
 promptUser();
 
-module.exports = promptUser;
+module.exports = {promptUser}
