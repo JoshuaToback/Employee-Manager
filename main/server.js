@@ -77,7 +77,6 @@ function promptUser() {
   
 };
 console.log('\n\n')
-promptUser();
 
 function showDepartments() {
       connection.query('SELECT * FROM department', function (err, res) {
@@ -121,6 +120,7 @@ function addDepartment() {
       connection.query(query, [response.name], (err, res) => {
         console.table(showDepartments());
         console.log(`Successfully inserted ${response.name} department at id ${res.insertId}`);
+        promptUser();
       });
     });
 };
@@ -155,35 +155,21 @@ function deleteDepartment() {
 };
 
 function addRole() {
-  inquirer.prompt([
+
+  let questions = [
     {
       type: 'input', 
       name: 'role',
-      message: "What role do you want to add?",
-      validate: addRole => {
-        if (addRole) {
-            return true;
-        } else {
-            console.log('Please enter a role');
-            return false;
-        }
-      }
+      message: "What role do you want to add?"
     },
     {
       type: 'input', 
       name: 'salary',
-      message: "What is the salary of this role?",
-      validate: addSalary => {
-        if (addSalary) {
-            return true;
-        } else {
-            console.log('Please enter a Salary!');
-            return false;
-        }
-      }
+      message: "What is the salary of this role?"
     }
-  ]).then(answer => {
-    const params = [answer.role, answer.salary];
+  ]
+  inquirer.prompt(questions).then(response => {
+    const params = [response.role, response.salary];
     
     // Grabs Department from Department Table to Select for Role Assignment.
     connection.query(`SELECT name, id FROM department`, (err, data) => {
@@ -209,7 +195,7 @@ function addRole() {
           connection.query(sql, params, function (err, result) {
             if (err) throw err;
             console.table(showRoles());
-            console.log('Added ' + answer.role + " to roles!"); 
+            console.log('Added ' + response.role + " to roles!"); 
             promptUser();
           });
         });
@@ -252,27 +238,11 @@ function addEmployee() {
       type: 'input',
       name: 'fistName',
       message: "What is the employee's first name?",
-      validate: addFirst => {
-        if (addFirst) {
-            return true;
-        } else {
-            console.log('Please enter a first name');
-            return false;
-        }
-      }
     },
     {
       type: 'input',
       name: 'lastName',
       message: "What is the employee's last name?",
-      validate: addLast => {
-        if (addLast) {
-            return true;
-        } else {
-            console.log('Please enter a last name');
-            return false;
-        }
-      }
     }
   ])
     .then(answer => {
@@ -422,3 +392,6 @@ function updateEmployee() {
     });
   });
 };
+
+
+promptUser();
