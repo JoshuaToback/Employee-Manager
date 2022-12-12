@@ -85,28 +85,28 @@ function showDepartments() {
         };
         console.log('\nShowing all departments...\n');
         console.table(res);
-        promptUser();
       });
+    promptUser();
   };
 
 function showRoles() {
       connection.query('SELECT * from role', function (err, res) {
       console.log('\nShowing all Roles...\n')
       console.table(res);
-      promptUser();
     });
+  promptUser();
 };
 
 function showEmployees() {
   connection.query('SELECT * from employees', function (err, res) {
     console.log('\nShowing all Employees...\n')
     console.table(res);
-    promptUser();
   });
+  promptUser();
 };
 
 function addDepartment() {
-    let questions = [
+    const questions = [
       {
         type: "input",
         name: "name",
@@ -120,7 +120,6 @@ function addDepartment() {
       connection.query(query, [response.name], (err, res) => {
         console.table(showDepartments());
         console.log(`Successfully inserted ${response.name} department at id ${res.insertId}`);
-        promptUser();
       });
     });
 };
@@ -148,7 +147,6 @@ function deleteDepartment() {
             if (err) throw err;
           console.table(showDepartments());
           console.log(`The department ${dept} has been deleted!`); 
-          promptUser();
         });
       });
     });
@@ -156,7 +154,7 @@ function deleteDepartment() {
 
 function addRole() {
 
-  let questions = [
+  const questions = [
     {
       type: 'input', 
       name: 'role',
@@ -196,7 +194,6 @@ function addRole() {
             if (err) throw err;
             console.table(showRoles());
             console.log('Added ' + response.role + " to roles!"); 
-            promptUser();
           });
         });
       });
@@ -226,7 +223,6 @@ function deleteRole() {
             if (err) throw err;
           console.table(showRoles());
           console.log(`The department ${role} has been deleted!`); 
-          promptUser();
         });
       });
     });
@@ -294,7 +290,6 @@ function addEmployee() {
                     if (err) throw err;
                     console.log("Employee has been added!")
                     showEmployees();
-                    promptUser();
                   });
                 });
               });
@@ -329,7 +324,6 @@ function deleteEmployee() {
           console.log("Successfully Deleted!");
         
           showEmployees();
-          promptUser();
     });
   });
  });
@@ -385,7 +379,6 @@ function updateEmployee() {
                   if (err) throw err;
                 console.log("Employee has been updated!");
                 showEmployees();
-                promptUser();
           });
         });
       });
