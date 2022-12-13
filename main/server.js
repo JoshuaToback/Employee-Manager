@@ -85,24 +85,27 @@ function showDepartments() {
         };
         console.log('\nShowing all departments...\n');
         console.table(res);
+        promptUser();
       });
-    promptUser();
+    
   };
 
 function showRoles() {
       connection.query('SELECT * from role', function (err, res) {
       console.log('\nShowing all Roles...\n')
       console.table(res);
+      promptUser();
     });
-  promptUser();
+  
 };
 
 function showEmployees() {
   connection.query('SELECT * from employees', function (err, res) {
     console.log('\nShowing all Employees...\n')
     console.table(res);
+    promptUser();
   });
-  promptUser();
+  
 };
 
 function addDepartment() {
@@ -193,7 +196,7 @@ function addRole() {
           connection.query(sql, params, function (err, result) {
             if (err) throw err;
             console.table(showRoles());
-            console.log('Added ' + response.role + " to roles!"); 
+            console.log('Added ' + response.role + " to roles!");
           });
         });
       });
@@ -322,8 +325,7 @@ function deleteEmployee() {
         connection.query(sql, employee, (err, result) => {
           if (err) throw err;
           console.log("Successfully Deleted!");
-        
-          showEmployees();
+          console.table(showEmployees());
     });
   });
  });
@@ -378,7 +380,7 @@ function updateEmployee() {
                 connection.query(sql, params, (err, result) => {
                   if (err) throw err;
                 console.log("Employee has been updated!");
-                showEmployees();
+                console.table(showEmployees());
           });
         });
       });
