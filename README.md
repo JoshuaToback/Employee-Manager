@@ -1,4 +1,4 @@
-# Employee Tracker 
+# Employee Manager 
   [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
   ## Table of Contents
   * [Description](#description)
@@ -14,7 +14,12 @@
   Using the command line, you can modify a database of employees, departments, and roles using SQL, Node, and Inquirer!
   ## Installation
   Make sure you have Node installed on your PC/Mac. Then, download the repository and open Git Bash or your Terminal. After that, you're ready to go! 
+  ![EmployeeManager](./assets/Application.png)
+  
+  #
   ## Usage
+  
+  ## You can watch a video walkthrough of the application [here](https://www.youtube.com/watch?v=XQyRdqz8xLk)!
 
   ## Licenses
     This project is covered under the MIT license. To learn more about what this means, click the license button at the top.
